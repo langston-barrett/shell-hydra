@@ -1,0 +1,18 @@
+[
+    {
+        "key": "g",
+        "desc": "git",
+        "keys": [
+            {
+                "key": "s",
+                "desc": "status",
+                "cmd": ["git", "status"]
+            },
+            {
+                "key": "c",
+                "desc": "commit",
+                "cmd": ["git", "commit"]
+            }
+        ]
+    }
+]

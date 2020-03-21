@@ -1,0 +1,5 @@
+* shell-hydra
+
+  Shell Hydra brings the goodness of Emacs's [[https://github.com/abo-abo/hydra][hydra]] to the command line.
+  It allows you to easily create keybindings for groups of related shell
+  commands.
