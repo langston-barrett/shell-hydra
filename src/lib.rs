@@ -10,6 +10,7 @@ mod charin;
 use charin::CharIn;
 
 use std::process::Command;
+use std::os::unix::process::CommandExt;
 
 // --------------------------------------------------------------
 // ** types
@@ -63,9 +64,7 @@ pub fn go(mut elts: Vec<Element>) -> std::io::Result<()> {
                             Some((first, args)) => {
                                 let mut child = Command::new(first)
                                     .args(args)
-                                    .spawn()
-                                    .expect("failed to run");
-                                child.wait();
+                                    .exec();
                                 return Ok(());
                             }
                             None => {
