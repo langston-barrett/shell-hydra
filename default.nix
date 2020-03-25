@@ -9,7 +9,7 @@ in pkgs.rustPlatform.buildRustPackage {
   inherit version;
   name = "${pname}-${version}";
   src = pkgs.nix-gitignore.gitignoreSource [./.gitignore] ./.;
-  cargoSha256 = "1hpp55d8irqwj2902x3218x35wqg4mps3i17j51gsvfby9lsd5mb";
+  cargoSha256 = "1zpr1y5fiap8wpascpikh7hgaq48hal3k9hga6jc131hc6a0xpjv";
   postInstall = ''
     cp -r $src/conf $out/conf/
   '';
