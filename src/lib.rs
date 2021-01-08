@@ -9,8 +9,8 @@ extern crate serde;
 mod charin;
 use charin::CharIn;
 
-use std::process::Command;
 use std::os::unix::process::CommandExt;
+use std::process::Command;
 
 // --------------------------------------------------------------
 // ** types
@@ -60,26 +60,26 @@ pub fn go(mut elts: Vec<Element>) -> std::io::Result<()> {
             Some(elt) => {
                 match &elt.rec {
                     Some(Rec::Cmd(cmd)) => {
-                        match cmd.split_first() {
-                            Some((first, args)) => {
-                                let mut child = Command::new(first)
-                                    .args(args)
-                                    .exec();
-                                return Ok(());
-                            }
-                            None => {
-                                println!("User error: invalid command {:?}", cmd);
-                            }
-                        }
+                        Command::new("bash")
+                            .args(vec!["-c", format!("{} & disown", cmd.join(" ")).as_str()])
+                            .spawn();
+                        return Ok(());
+                        // match cmd.split_first() {
+                        //     Some((first, args)) => {
+                        //         let mut child = Command::new(first)
+                        //             .args(args)
+                        //             .exec();
+                        //     }
+                        //     None => {
+                        //         println!("User error: invalid command {:?}", cmd);
+                        //     }
+                        // }
                     }
                     Some(Rec::Rec(new_elts)) => {
                         elts = new_elts.to_vec();
                     }
-                    _ => {
-                        println!("none!")
-                    }
+                    _ => println!("none!"),
                 }
-
             }
         }
     }
